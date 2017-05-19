@@ -1,0 +1,13 @@
+[package]
+name = "hostinfo"
+version = "0.0.1"
+authors = ["Bruce Mitchener <bruce.mitchener@gmail.com>"]
+license = "MIT/Apache-2.0"
+readme = "README.md"
+description = ""
+keywords = ["hostinfo"]
+homepage = "https://github.com/endoli/hostinfo.rs"
+repository = "https://github.com/endoli/hostinfo.rs"
+documentation = "https://endoli.github.io/hostinfo.rs/"
+
+[dependencies]
