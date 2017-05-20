@@ -4,16 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-//! Host Info
+//! Kernel Information
 
-#![warn(missing_docs)]
-#![deny(trivial_numeric_casts, unstable_features,
-        unused_import_braces, unused_qualifications)]
+#[cfg(target_os = "macos")]
+mod bsd;
 
-extern crate libc;
-
-pub mod hw;
-pub mod kern;
-
-pub use hw::Hardware;
-pub use kern::Kernel;
+#[cfg(target_os = "macos")]
+pub use self::bsd::*;
