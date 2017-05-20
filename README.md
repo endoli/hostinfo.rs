@@ -1,4 +1,4 @@
-# Disassemble
+# Host Info
 
 [![Build Status](https://travis-ci.org/endoli/hostinfo.rs.svg?branch=master)](https://travis-ci.org/endoli/hostinfo.rs)
 [![](http://meritbadge.herokuapp.com/hostinfo)](https://crates.io/crates/hostinfo)
