@@ -7,10 +7,21 @@
 use libc;
 use std::mem;
 use std::ptr;
+use os::SwapUsage;
 
 #[allow(missing_docs)]
 #[derive(Default)]
 pub struct OperatingSystem {}
+
+#[repr(C)]
+#[derive(Default)]
+struct XSwapUsage {
+    xsu_total: u64,
+    xsu_avail: u64,
+    xsu_used: u64,
+    xsu_pagesize: u32,
+    xsu_encrypted: bool,
+}
 
 impl OperatingSystem {
     #[allow(missing_docs)]
@@ -66,5 +77,29 @@ impl OperatingSystem {
             panic!("maxfiles: error calling sysctl");
         }
         maxfiles
+    }
+
+    #[allow(missing_docs)]
+    pub fn swap_usage(&self) -> Option<SwapUsage> {
+        let mut mib: [libc::c_int; 2] = [libc::CTL_VM, libc::VM_SWAPUSAGE];
+        let mut swap = XSwapUsage::default();
+        let mut size: libc::size_t = mem::size_of_val(&swap);
+        if unsafe {
+               libc::sysctl(&mut mib[0],
+                            2,
+                            &mut swap as *mut XSwapUsage as *mut libc::c_void,
+                            &mut size,
+                            ptr::null_mut(),
+                            0)
+           } != 0 {
+            panic!("swap_usage: error calling sysctl");
+        }
+        Some(SwapUsage {
+                 total: swap.xsu_total,
+                 available: swap.xsu_avail,
+                 used: swap.xsu_used,
+                 page_size: swap.xsu_pagesize,
+                 encrypted: swap.xsu_encrypted,
+             })
     }
 }

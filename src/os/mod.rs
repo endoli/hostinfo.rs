@@ -11,3 +11,25 @@ mod bsd;
 
 #[cfg(target_os = "macos")]
 pub use self::bsd::*;
+
+#[allow(missing_docs)]
+#[derive(Debug, Default)]
+pub struct SwapUsage {
+    pub total: u64,
+    pub available: u64,
+    pub used: u64,
+    pub page_size: u32,
+    pub encrypted: bool,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_swap() {
+        let os = OperatingSystem::new();
+        let su = os.swap_usage();
+        assert_eq!("", format!("{:?}", su));
+    }
+}

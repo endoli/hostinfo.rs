@@ -16,4 +16,4 @@ pub mod hw;
 pub mod os;
 
 pub use hw::Hardware;
-pub use os::OperatingSystem;
+pub use os::{OperatingSystem, SwapUsage};
