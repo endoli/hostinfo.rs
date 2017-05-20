@@ -10,9 +10,9 @@ use std::ptr;
 
 #[allow(missing_docs)]
 #[derive(Default)]
-pub struct Kernel {}
+pub struct OperatingSystem {}
 
-impl Kernel {
+impl OperatingSystem {
     #[allow(missing_docs)]
     pub fn new() -> Self {
         Default::default()

@@ -13,7 +13,7 @@
 extern crate libc;
 
 pub mod hw;
-pub mod kern;
+pub mod os;
 
 pub use hw::Hardware;
-pub use kern::Kernel;
+pub use os::OperatingSystem;
