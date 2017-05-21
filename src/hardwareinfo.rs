@@ -6,6 +6,17 @@
 
 /// Information about the hardware.
 pub trait HardwareInfo {
+    /// How many CPUs are currently online and available
+    /// for use.
+    ///
+    /// ```rust
+    /// use hostinfo::{HardwareInfo, HostInfo};
+    ///
+    /// let hi = HostInfo::new();
+    /// assert!(hi.online_cpu_count() > 0);
+    /// ```
+    fn online_cpu_count(&self) -> u32;
+
     /// In bytes, how much physical memory is present.
     ///
     /// ```rust
