@@ -9,12 +9,12 @@ mod kernellimits;
 mod swapinfo;
 mod uptimeinfo;
 
-#[allow(missing_docs)]
+/// Entry point for accessing information about this host.
 #[derive(Default)]
 pub struct HostInfo {}
 
 impl HostInfo {
-    #[allow(missing_docs)]
+    /// Create a new instance of `HostInfo`.
     pub fn new() -> Self {
         Default::default()
     }

@@ -9,7 +9,6 @@ use std::mem;
 use std::ptr;
 
 impl ::KernelLimits for ::HostInfo {
-    #[allow(missing_docs)]
     fn max_file_handles(&self) -> i32 {
         let mut mib: [libc::c_int; 2] = [libc::CTL_KERN, libc::KERN_MAXFILESPERPROC];
         let mut maxfiles: libc::c_int = 0;

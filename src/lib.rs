@@ -5,7 +5,19 @@
 // except according to those terms.
 
 //! Host Info
-
+//!
+//! This crate makes available information about the computer,
+//! operating system and software that is running.
+//!
+//! All of the functionality is presented by traits which are
+//! implemented by a `HostInfo` struct.
+//!
+//! ```rust
+//! use hostinfo::{HostInfo, UptimeInfo};
+//!
+//! let hi = HostInfo::new();
+//! let uptime = hi.uptime();
+//! ```
 #![warn(missing_docs)]
 #![deny(trivial_numeric_casts, unstable_features,
         unused_import_braces, unused_qualifications)]
