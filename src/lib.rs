@@ -12,8 +12,17 @@
 
 extern crate libc;
 
-pub mod hw;
-pub mod os;
+mod sys;
+pub use self::sys::HostInfo;
 
-pub use hw::Hardware;
-pub use os::{OperatingSystem, SwapUsage};
+mod hardwareinfo;
+pub use self::hardwareinfo::HardwareInfo;
+
+mod kernellimits;
+pub use self::kernellimits::KernelLimits;
+
+mod swapinfo;
+pub use self::swapinfo::{SwapInfo, SwapUsage};
+
+mod uptimeinfo;
+pub use self::uptimeinfo::UptimeInfo;

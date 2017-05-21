@@ -8,31 +8,22 @@ use libc;
 use std::mem;
 use std::ptr;
 
-#[allow(missing_docs)]
-#[derive(Default)]
-pub struct Hardware {}
-
-impl Hardware {
+impl ::KernelLimits for ::HostInfo {
     #[allow(missing_docs)]
-    pub fn new() -> Self {
-        Default::default()
-    }
-
-    #[allow(missing_docs)]
-    pub fn memory_size(&self) -> u64 {
-        let mut mib: [libc::c_int; 2] = [libc::CTL_HW, libc::HW_MEMSIZE];
-        let mut memsize: libc::uint64_t = 0;
-        let mut size: libc::size_t = mem::size_of_val(&memsize);
+    fn max_file_handles(&self) -> i32 {
+        let mut mib: [libc::c_int; 2] = [libc::CTL_KERN, libc::KERN_MAXFILESPERPROC];
+        let mut maxfiles: libc::c_int = 0;
+        let mut size: libc::size_t = mem::size_of_val(&maxfiles);
         if unsafe {
                libc::sysctl(&mut mib[0],
                             2,
-                            &mut memsize as *mut libc::uint64_t as *mut libc::c_void,
+                            &mut maxfiles as *mut libc::c_int as *mut libc::c_void,
                             &mut size,
                             ptr::null_mut(),
                             0)
            } != 0 {
-            panic!("memsize: error calling sysctl");
+            panic!("max_file_handles: error calling sysctl");
         }
-        memsize
+        maxfiles
     }
 }

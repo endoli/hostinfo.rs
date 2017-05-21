@@ -4,14 +4,6 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-//! Operating System Information
-
-#[cfg(target_os = "macos")]
-mod bsd;
-
-#[cfg(target_os = "macos")]
-pub use self::bsd::*;
-
 #[allow(missing_docs)]
 #[derive(Debug, Default)]
 pub struct SwapUsage {
@@ -22,14 +14,7 @@ pub struct SwapUsage {
     pub encrypted: bool,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_swap() {
-        let os = OperatingSystem::new();
-        let su = os.swap_usage();
-        assert_eq!("", format!("{:?}", su));
-    }
+#[allow(missing_docs)]
+pub trait SwapInfo {
+    fn swap_usage(&self) -> Option<SwapUsage>;
 }

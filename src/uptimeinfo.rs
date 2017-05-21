@@ -4,10 +4,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-//! Hardware Information
+use libc;
 
-#[cfg(target_os = "macos")]
-mod bsd;
-
-#[cfg(target_os = "macos")]
-pub use self::bsd::*;
+#[allow(missing_docs)]
+pub trait UptimeInfo {
+    fn boottime(&self) -> libc::timeval;
+    fn uptime(&self) -> i64;
+}
