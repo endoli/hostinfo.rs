@@ -22,6 +22,7 @@
 #![deny(trivial_numeric_casts, unstable_features,
         unused_import_braces, unused_qualifications)]
 
+extern crate core_foundation;
 extern crate libc;
 
 mod sys;
@@ -32,6 +33,9 @@ pub use self::hardwareinfo::HardwareInfo;
 
 mod kernellimits;
 pub use self::kernellimits::KernelLimits;
+
+mod powerinfo;
+pub use self::powerinfo::{PowerInfo, PowerSource};
 
 mod swapinfo;
 pub use self::swapinfo::{SwapInfo, SwapUsage};

@@ -6,6 +6,7 @@
 
 mod hardwareinfo;
 mod kernellimits;
+mod powerinfo;
 mod swapinfo;
 mod uptimeinfo;
 
