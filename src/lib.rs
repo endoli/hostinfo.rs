@@ -22,6 +22,7 @@
 #![deny(trivial_numeric_casts, unstable_features,
         unused_import_braces, unused_qualifications)]
 
+#[cfg(target_os = "macos")]
 extern crate core_foundation;
 extern crate libc;
 
