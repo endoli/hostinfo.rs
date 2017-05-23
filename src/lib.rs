@@ -35,7 +35,7 @@ mod kernellimits;
 pub use self::kernellimits::KernelLimits;
 
 mod powerinfo;
-pub use self::powerinfo::{PowerInfo, PowerSource};
+pub use self::powerinfo::{BatteryInfo, PowerInfo, PowerSource};
 
 mod swapinfo;
 pub use self::swapinfo::{SwapInfo, SwapUsage};

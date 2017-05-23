@@ -4,6 +4,25 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+/// Basic battery info.
+///
+/// This is obtained by calling `battery_info` on a `HostInfo`:
+///
+/// ```rust
+/// use hostinfo::{HostInfo, PowerInfo};
+///
+/// let hi = HostInfo::new();
+/// let bi = hi.battery_info();
+/// ```
+#[derive(Clone, Copy, Debug)]
+pub struct BatteryInfo {
+    /// Is the battery currently charging?
+    pub charging: bool,
+    /// The current capacity of the battery, as a percentage,
+    /// scaled to a value between `0.0` and `1.0`.
+    pub level: f64,
+}
+
 /// What is the power source for the machine?
 ///
 /// This is obtained by calling `power_source` on a `HostInfo`:
@@ -12,7 +31,7 @@
 /// use hostinfo::{HostInfo, PowerInfo};
 ///
 /// let hi = HostInfo::new();
-/// let ps = hi.power_source() {
+/// let ps = hi.power_source();
 /// ```
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum PowerSource {
@@ -34,7 +53,17 @@ pub trait PowerInfo {
     /// use hostinfo::{HostInfo, PowerInfo};
     ///
     /// let hi = HostInfo::new();
-    /// let ps = hi.power_source() {
+    /// let ps = hi.power_source();
     /// ```
     fn power_source(&self) -> PowerSource;
+
+    /// Get basic info about current battery status.
+    ///
+    /// ```rust
+    /// use hostinfo::{HostInfo, PowerInfo};
+    ///
+    /// let hi = HostInfo::new();
+    /// let ps = hi.battery_info();
+    /// ```
+    fn battery_info(&self) -> Option<BatteryInfo>;
 }
