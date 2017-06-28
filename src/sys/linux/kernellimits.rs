@@ -4,14 +4,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-#[cfg(target_os = "macos")]
-mod darwin;
+use libc;
 
-#[cfg(target_os = "macos")]
-pub use self::darwin::HostInfo;
-
-#[cfg(target_os = "linux")]
-mod linux;
-
-#[cfg(target_os = "linux")]
-pub use self::linux::HostInfo;
+impl ::KernelLimits for ::HostInfo {
+    fn max_file_handles(&self) -> i32 {
+        unsafe {
+            let mut limits = libc::rlimit { rlim_cur: 0, rlim_max: 0 };
+            libc::getrlimit(libc::RLIMIT_NOFILE, &mut limits);
+            limits.rlim_cur as i32
+        }
+    }
+}
