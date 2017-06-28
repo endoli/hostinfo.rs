@@ -4,14 +4,12 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-#[cfg(target_os = "macos")]
-mod darwin;
+impl ::PowerInfo for ::HostInfo {
+    fn power_source(&self) -> ::PowerSource {
+        ::PowerSource::Unknown // TODO
+    }
 
-#[cfg(target_os = "macos")]
-pub use self::darwin::HostInfo;
-
-#[cfg(target_os = "linux")]
-mod linux;
-
-#[cfg(target_os = "linux")]
-pub use self::linux::HostInfo;
+    fn battery_info(&self) -> Option<::BatteryInfo> {
+        None // TODO
+    }
+}
